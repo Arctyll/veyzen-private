@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "io.github.classycoder1.mixins",
+  "package": "io.github.arctyll.veyzen.mixins",
   "refmap": "mixins.veyzen.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "client": [

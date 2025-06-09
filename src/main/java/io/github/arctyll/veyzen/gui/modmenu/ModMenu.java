@@ -22,7 +22,7 @@ import java.io.IOException;
 public class ModMenu extends GuiScreen {
 
     private final Panel panel = new Panel();
-
+	
     private final Animate animateModMenu = new Animate();
     private final Animate animateClock = new Animate();
     private final Animate animateSnapping = new Animate();

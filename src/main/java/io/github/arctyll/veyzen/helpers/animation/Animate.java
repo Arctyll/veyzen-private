@@ -21,7 +21,7 @@ public class Animate {
     }
 
     public void reset() {
-        time = min;
+        time = reversed ? max : min;
     }
 
     public Animate update() {

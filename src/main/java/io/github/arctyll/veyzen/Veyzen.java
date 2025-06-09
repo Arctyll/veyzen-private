@@ -35,9 +35,9 @@ public class Veyzen {
     @Mod.Instance()
     public static Veyzen INSTANCE;
 
-    public static final String modID = "cloudmc";
-    public static final String modName = "Cloud";
-    public static final String modVersion = "1.4.1 [1.8.9]";
+    public static final String modID = "veyzen";
+    public static final String modName = "VeyzenMC";
+    public static final String modVersion = "1.0 [1.8.9]";
 
     public Minecraft mc = Minecraft.getMinecraft();
 

@@ -121,135 +121,143 @@ public class Panel {
     }
 
     /**
-     * Renders the panel background, the sidebar and all the buttons
-     *
-     * @param mouseX The current X position of the mouse
-     * @param mouseY The current Y position of the mouse
-     */
+	 * Renders the panel background, the sidebar and all the buttons
+	 *
+	 * @param mouseX The current X position of the mouse
+	 * @param mouseY The current Y position of the mouse
+	 */
+	public void renderPanel(int mouseX, int mouseY) {
+		final boolean roundedCorners = Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled();
+		final int color = Veyzen.INSTANCE.optionManager.getOptionByName("Color").getColor().getRGB();
 
-    public void renderPanel(int mouseX, int mouseY) {
-        boolean roundedCorners = Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled();
-        int color = Veyzen.INSTANCE.optionManager.getOptionByName("Color").getColor().getRGB();
-        Helper2D.drawRoundedRectangle(x, y, w, h, 2, Style.getColor(80).getRGB(), roundedCorners ? 1 : -1);
-        Helper2D.drawRoundedRectangle(x,
-                selected == 1 ? y + 30 : y + 60, w,
-                selected == 1 ? h + 270 : h + 240, 2,
-                Style.getColor(50).getRGB(), roundedCorners ? 2 : -1
-        );
-        if (selected == 0)
-            Helper2D.drawRectangle(x, y + 30, w, 30, Style.getColor(70).getRGB());
+		final int HEADER_HEIGHT = 30;
+		final int TAB_OFFSET_Y = 30;
+		final int MODS_AREA_EXTRA_HEIGHT = 270;
+		final int OPTIONS_AREA_EXTRA_HEIGHT = 240;
+		final int TAB_BAR_HEIGHT = 30;
+		final int TEXTBOX_OFFSET_Y = 5;
+		final int CLOSE_BUTTON_SIZE = 20;
+		final int CLOSE_BUTTON_MARGIN = 5;
 
-        boolean hovered = MathHelper.withinBox(x + w - 25, y + 5, 20, 20, mouseX, mouseY);
-        Helper2D.drawRoundedRectangle(x + w - 25, y + 5, 20, 20, 2, Style.getColor(hovered ? 70 : 50).getRGB(), roundedCorners ? 0 : -1);
-        Helper2D.drawPicture(x + w - 25, y + 5, 20, 20, color, "icon/cross.png");
+		Helper2D.drawRoundedRectangle(x, y, w, h, 2, Style.getColor(80).getRGB(), roundedCorners ? 1 : -1);
 
-        Helper2D.drawPicture(x + 2, y - 1, 35, 35, color, "cloudlogo.png");
-        Veyzen.INSTANCE.fontHelper.size40.drawString(Veyzen.modName, x + 37, y + 6, color);
+		Helper2D.drawRoundedRectangle(
+			x,
+			selected == 1 ? y + TAB_OFFSET_Y : y + TAB_OFFSET_Y * 2,
+			w,
+			selected == 1 ? h + MODS_AREA_EXTRA_HEIGHT : h + OPTIONS_AREA_EXTRA_HEIGHT,
+			2,
+			Style.getColor(50).getRGB(),
+			roundedCorners ? 2 : -1
+		);
 
-        /*
-        Buttons are only drawn if the Sidebar is on the mods tab
-         */
+		if (selected == 0) {
+			Helper2D.drawRectangle(x, y + TAB_OFFSET_Y, w, TAB_BAR_HEIGHT, Style.getColor(70).getRGB());
+		}
 
-        animateTransition.update();
-        scrollHelperMods.update();
-        scrollHelperOptions.update();
+		boolean hoveredClose = MathHelper.withinBox(x + w - CLOSE_BUTTON_SIZE - CLOSE_BUTTON_MARGIN, y + CLOSE_BUTTON_MARGIN, CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE, mouseX, mouseY);
+		Helper2D.drawRoundedRectangle(x + w - CLOSE_BUTTON_SIZE - CLOSE_BUTTON_MARGIN, y + CLOSE_BUTTON_MARGIN, CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE, 2, Style.getColor(hoveredClose ? 70 : 50).getRGB(), roundedCorners ? 0 : -1);
+		Helper2D.drawPicture(x + w - CLOSE_BUTTON_SIZE - CLOSE_BUTTON_MARGIN, y + CLOSE_BUTTON_MARGIN, CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE, color, "icon/cross.png");
 
-        Veyzen.INSTANCE.messageHelper.renderMessage();
+		Helper2D.drawPicture(x + 2, y - 1, 35, 35, color, "veyzenlogo.png");
+		Veyzen.INSTANCE.fontHelper.size40.drawString(Veyzen.modName, x + 37, y + 6, color);
 
-        if (selected == 0) {
-            int offset = 0;
-            for (Type type : Type.values()) {
-                String text = type.name();
-                int length = Veyzen.INSTANCE.fontHelper.size20.getStringWidth(text);
-                Helper2D.drawRoundedRectangle(
-                        x + offset + 5,
-                        y + h + 5,
-                        length + 25,
-                        20, 2,
-                        Style.getColor(selectedType.equals(type) ? 120 : 50).getRGB(),
-                        roundedCorners ? 0 : -1
-                );
-                Helper2D.drawPicture(x + offset + 8, y + h + 8, 15, 15, -1, "icon/" + type.getIcon());
-                Veyzen.INSTANCE.fontHelper.size20.drawString(text, x + offset + 26, y + h + 11, -1);
-                offset += length + 30;
-            }
+		animateTransition.update();
+		scrollHelperMods.update();
+		scrollHelperOptions.update();
 
-            textBox.renderTextBox(x + w - textBox.getW() - 5, y + h + 5, mouseX, mouseY);
+		Veyzen.INSTANCE.messageHelper.renderMessage();
 
-            GLHelper.startScissor(x, y + 60, w, h + 240);
-            for (Button button : buttonList) {
-                button.renderButton(mouseX, mouseY);
-            }
-            GLHelper.endScissor();
+		if (selected == 0) {
+			int offset = 0;
+			for (Type type : Type.values()) {
+				String text = type.name();
+				int length = Veyzen.INSTANCE.fontHelper.size20.getStringWidth(text);
 
-            if (MathHelper.withinBox(x, y + 30, w, h + 270, mouseX, mouseY)) {
-                int height = 0;
-                int index = 0;
-                for (Button button : buttonList) {
-                    if (index % 4 == 0) {
-                        height += button.getH() + 3;
-                    }
-                    index++;
-                }
-                scrollHelperMods.updateScroll();
-                scrollHelperMods.setHeight(height);
+				Helper2D.drawRoundedRectangle(
+					x + offset + 5,
+					y + h + TEXTBOX_OFFSET_Y,
+					length + 25,
+					20, 2,
+					Style.getColor(selectedType.equals(type) ? 120 : 50).getRGB(),
+					roundedCorners ? 0 : -1
+				);
 
-                index = 0;
-                int count = 0;
-                for (Button button : buttonList) {
-                    float position = scrollHelperMods.getCalculatedScroll();
-                    position += count * (button.getH() + 3);
-                    button.setY((int) position);
-                    index++;
-                    if (index % 4 == 0) {
-                        count++;
-                    }
-                }
-            }
-        } else if (selected == 1) {
-            GLHelper.startScissor(x, y + 30, w, h + 270);
-            for (Options option : optionsList) {
-                option.renderOption(mouseX, mouseY);
-            }
-            GLHelper.endScissor();
+				Helper2D.drawPicture(x + offset + 8, y + h + 8, 15, 15, -1, "icon/" + type.getIcon());
+				Veyzen.INSTANCE.fontHelper.size20.drawString(text, x + offset + 26, y + h + 11, -1);
 
-            if (MathHelper.withinBox(x, y + 30, w, h + 270, mouseX, mouseY)) {
-                int height = 0;
-                for (Options options : optionsList) {
-                    height += options.getH();
-                }
-                scrollHelperOptions.setHeight(height);
-                scrollHelperOptions.updateScroll();
+				offset += length + 30;
+			}
 
-                height = 0;
-                for (Options options : optionsList) {
-                    float position = height;
-                    position += scrollHelperOptions.getCalculatedScroll() + 10;
-                    options.setY((int) position);
-                    height += options.getH();
-                }
-            }
-        }
+			textBox.renderTextBox(x + w - textBox.getW() - 5, y + h + TEXTBOX_OFFSET_Y, mouseX, mouseY);
 
-        /*
-        Draws the sidebar with the mods and settings tab
-         */
+			GLHelper.startScissor(x, y + TAB_OFFSET_Y * 2, w, h + OPTIONS_AREA_EXTRA_HEIGHT);
+			for (Button button : buttonList) {
+				button.renderButton(mouseX, mouseY);
+			}
+			GLHelper.endScissor();
 
-        animateSideBar.update();
+			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
+				int height = 0;
+				int index = 0;
 
-        Helper2D.drawRoundedRectangle(x - 50, y, 40, h + 300, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
+				for (Button button : buttonList) {
+					if (index % 4 == 0) height += button.getH() + 3;
+					index++;
+				}
 
-        int value = selected == 1 ? animateSideBar.getValueI() : 40 - animateSideBar.getValueI();
-        Helper2D.drawRoundedRectangle(x - 50, y + value, 40, 40, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
+				scrollHelperMods.setHeight(height);
+				scrollHelperMods.updateScroll();
 
-        int index = 0;
-        for (String button : sideButtons) {
-            Veyzen.INSTANCE.fontHelper.size15.drawString(button, x - 30 - Veyzen.INSTANCE.fontHelper.size15.getStringWidth(button) / 2f, y + 30 + index * 40, color);
-            Helper2D.drawPicture(x - 40, y + 5 + index * 40, 20, 20, color, "icon/button/sidebar/" + button.toLowerCase() + ".png");
+				index = 0;
+				int count = 0;
+				for (Button button : buttonList) {
+					float position = scrollHelperMods.getCalculatedScroll();
+					position += count * (button.getH() + 3);
+					button.setY((int) position);
+					index++;
+					if (index % 4 == 0) count++;
+				}
+			}
+		} else if (selected == 1) {
+			GLHelper.startScissor(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT);
+			for (Options option : optionsList) {
+				option.renderOption(mouseX, mouseY);
+			}
+			GLHelper.endScissor();
 
-            index++;
-        }
-    }
+			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
+				int height = 0;
+				for (Options option : optionsList) {
+					height += option.getH();
+				}
+
+				scrollHelperOptions.setHeight(height);
+				scrollHelperOptions.updateScroll();
+
+				height = 0;
+				for (Options option : optionsList) {
+					float position = height + scrollHelperOptions.getCalculatedScroll() + 10;
+					option.setY((int) position);
+					height += option.getH();
+				}
+			}
+		}
+
+		animateSideBar.update();
+
+		Helper2D.drawRoundedRectangle(x - 50, y, 40, h + 300, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
+
+		int selectorOffset = selected == 1 ? animateSideBar.getValueI() : 40 - animateSideBar.getValueI();
+		Helper2D.drawRoundedRectangle(x - 50, y + selectorOffset, 40, 40, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
+
+		int buttonIndex = 0;
+		for (String button : sideButtons) {
+			Veyzen.INSTANCE.fontHelper.size15.drawString(button, x - 30 - Veyzen.INSTANCE.fontHelper.size15.getStringWidth(button) / 2f, y + 30 + buttonIndex * 40, color);
+			Helper2D.drawPicture(x - 40, y + 5 + buttonIndex * 40, 20, 20, color, "icon/button/sidebar/" + button.toLowerCase() + ".png");
+			buttonIndex++;
+		}
+	}
 
     /**
      * Closes the modmenu and opens the editor if the close button is pressed

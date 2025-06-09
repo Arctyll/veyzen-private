@@ -23,4 +23,4 @@ plugins {
 }
 
 
-rootProject.name = "VeyzenMC"
+rootProject.name = "Veyzen"

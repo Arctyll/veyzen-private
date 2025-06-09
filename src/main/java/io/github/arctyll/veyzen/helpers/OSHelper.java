@@ -27,7 +27,7 @@ public class OSHelper {
         return Veyzen.INSTANCE.mc.mcDataDir.getAbsolutePath() + File.separator;
     }
 
-    public static String getCloudDirectory() {
-        return getMinecraftDirectory() + "cloud" + File.separator;
+    public static String getVeyzenDirectory() {
+        return getMinecraftDirectory() + "veyzen" + File.separator;
     }
 }

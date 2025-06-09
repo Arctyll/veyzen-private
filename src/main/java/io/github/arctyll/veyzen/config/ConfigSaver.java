@@ -20,13 +20,13 @@ import java.nio.file.Files;
 public class ConfigSaver {
 
     /**
-     * Creates and saves a configuration in .minecraft/cloud/config.json
+     * Creates and saves a configuration in .minecraft/veyzen/config.json
      */
 
     public static void saveConfig() throws IOException {
         createDir();
 
-        FileWriter writer = new FileWriter(OSHelper.getCloudDirectory() + "config.json");
+        FileWriter writer = new FileWriter(OSHelper.getVeyzenDirectory() + "config.json");
 
         Config config = new Config();
 
@@ -57,11 +57,11 @@ public class ConfigSaver {
     }
 
     /**
-     * Creates the .minecraft/cloud directory if it cannot be found
+     * Creates the .minecraft/veyzen directory if it cannot be found
      */
 
     private static void createDir() {
-        File file = new File(OSHelper.getCloudDirectory());
+        File file = new File(OSHelper.getVeyzenDirectory());
         if (!file.exists()) {
             try {
                 Files.createDirectory(file.toPath());
@@ -73,11 +73,11 @@ public class ConfigSaver {
     }
 
     /**
-     * Creates the .minecraft/cloud/config.json file if it cannot be found
+     * Creates the .minecraft/veyzen/config.json file if it cannot be found
      */
 
     private static void createFile() {
-        File file = new File(OSHelper.getCloudDirectory() + "config.json");
+        File file = new File(OSHelper.getVeyzenDirectory() + "config.json");
         if (!file.exists()) {
             try {
                 Files.createFile(file.toPath());
@@ -88,13 +88,13 @@ public class ConfigSaver {
     }
 
     /**
-     * Checks if the config .minecraft/cloud/config.json file exists
+     * Checks if the config .minecraft/veyzen/config.json file exists
      *
      * @return Config can be found
      */
 
     public static boolean configExists() {
-        File file = new File(OSHelper.getCloudDirectory() + "config.json");
+        File file = new File(OSHelper.getVeyzenDirectory() + "config.json");
         return file.exists();
     }
 }

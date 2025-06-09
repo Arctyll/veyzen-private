@@ -20,11 +20,11 @@ import java.io.FileReader;
 public class ConfigLoader {
 
     /**
-     * Loads the config from .minecraft/cloud/config.json
+     * Loads the config from .minecraft/veyzen/config.json
      */
 
     public static void loadConfig() throws FileNotFoundException {
-        FileReader reader = new FileReader(OSHelper.getCloudDirectory() + "config.json");
+        FileReader reader = new FileReader(OSHelper.getVeyzenDirectory() + "config.json");
 
         Config config = new Gson().fromJson(reader, Config.class);
 

@@ -36,7 +36,7 @@ public abstract class GuiIngameMenuMixin extends GuiScreen {
 
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 24 + i, I18n.format("menu.returnToGame")));
         this.buttonList.add(new GuiButton(30, this.width / 2 - 100, this.height / 4 + 96 + i, 98, 20, "Servers"));
-        this.buttonList.add(new GuiButton(31, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, "Cloud Client"));
+        this.buttonList.add(new GuiButton(31, this.width / 2 + 2, this.height / 4 + 96 + i, 98, 20, "Veyzen Client"));
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + i, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(12, this.width / 2 + 2, this.height / 4 + 120 + i, 98, 20, I18n.format("fml.menu.modoptions")));
         GuiButton guibutton;

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "veyzen",
+  "name": "Veyzen Client",
+  "description": "A 1.8.9 Minecraft PVP Client",
+  "version": "1.4.1",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "https://github.com/ClassyCoder1/VeyzenClient",
+  "authorList": ["ClassyCoder"],
+  "credits": "Moulberry, superblaubeere27, LaVache, CloudClient",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

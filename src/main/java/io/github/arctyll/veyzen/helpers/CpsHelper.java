@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2022 DupliCAT
+ * GNU Lesser General Public License v3.0
+ */
+
+package io.github.arctyll.veyzen.helpers;
+
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.MouseEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CpsHelper {
+
+    private final List<Long> leftClicks = new ArrayList<>();
+    private final List<Long> rightClicks = new ArrayList<>();
+
+    @SubscribeEvent
+    public void onClick(MouseEvent event) {
+        if (Minecraft.getMinecraft().currentScreen != null) return; // don't register cps in GUIs
+        long time = System.currentTimeMillis();
+
+        if (!event.buttonstate) return;
+
+        if (event.button == 0) leftClicks.add(time);
+        else if (event.button == 1) rightClicks.add(time);
+
+        removeOldClicks(time);
+    }
+
+    public int getCPS(int mouseButton) {
+        removeOldClicks(System.currentTimeMillis());
+        return mouseButton == 0 ? leftClicks.size() : rightClicks.size();
+    }
+
+    public void removeOldClicks(long currentTime) {
+		for (int i = 0; i < leftClicks.size(); i++) {
+			long clickTime = leftClicks.get(i);
+			if (clickTime + 1000 < currentTime) {
+				leftClicks.remove(i);
+				i--;
+			}
+		}
+
+		for (int i = 0; i < rightClicks.size(); i++) {
+			long clickTime = rightClicks.get(i);
+			if (clickTime + 1000 < currentTime) {
+				rightClicks.remove(i);
+				i--;
+			}
+		}
+	}
+}

@@ -1,13 +1,10 @@
 ![Logo](/screenshots/Logo.png)
 
-This project has now been discontinued and archived. It will no longer recieve updates or fixes. 
-
-# Cloud Client
-Cloud Client is an open source Minecraft PVP Client for 1.7.10 and 1.8.9 using the Forge API.
+# Veyzen Client
+Veyzen Client is an open source Minecraft PVP Client for 1.8.9 using the Forge API.
 
 ## Downloading
 - Download the mod from the Releases section here
-- Download the mod using the [Installer](https://github.com/CloudClientDev/cloudinstaller)
 
 ## Screenshots
 ### TitleScreen
@@ -41,20 +38,19 @@ gradlew setupDecompWorkspace eclipse
 ```
 
 ## Building
-1. Open either the `1.7.10\cloudclient` or `1.8.9\cloudclient` folder and copy the path.
-2. Open a command proment or terminal and change the directory to the copied path.
+1. Open a command proment or terminal and change the directory to the VeyzenClient's folder.
 ```
-cd C:\User\Desktop\cloudclient-main\<version>\cloudclient
+cd C:\User\Desktop\VeyzenClient
 ```
-3. Make a build
+2. Make a build
 ```
 gradlew build
 ```
 You will find the new build in
 ```
-C:\User\Desktop\cloudclient-main\<version>\cloudclient\build\libs
+C:\User\Desktop\VeyzenClient\build\libs
 ```
-4. Copy the .jar file and paste it into your mods folder and launch forge for your version.
+3. Copy the .jar file and paste it into your mods folder and launch forge for your version.
 
 ## Contributions
 Feel free to fork this project, make changes and finally make a pull request to the development branch.
@@ -74,6 +70,7 @@ Conditions:
 - Same license 
 
 This project uses code from:
+- CloudClient
 - superblaubeere27 (Font Renderer) https://github.com/superblaubeere27
 - LaVache-FR (AnimationUtil) https://github.com/LaVache-FR
 - Moulberry (MotionBlur) https://github.com/Moulberry

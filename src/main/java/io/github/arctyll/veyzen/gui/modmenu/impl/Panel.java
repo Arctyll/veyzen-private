@@ -338,7 +338,8 @@ public class Panel {
     }
 
     public void initGui() {
-        setX(ResolutionHelper.getWidth() / 2 - 250);
+        setX(ResolutionHelper.getWidth() / 2 - (getW() / 2));
+		setY(40);
     }
 
     /**
@@ -348,12 +349,12 @@ public class Panel {
      * @param mouseY The current Y position of the mouse
      */
 
-    public void updatePosition(int mouseX, int mouseY) {
-        if (isDragging()) {
-            setX(mouseX - offsetX);
-            setY(mouseY - offsetY);
-        }
-    }
+//    public void updatePosition(int mouseX, int mouseY) {
+//        if (isDragging()) {
+//            setX(mouseX - offsetX);
+//            setY(mouseY - offsetY);
+//        }
+//    }
 
     public int getX() {
         return x;

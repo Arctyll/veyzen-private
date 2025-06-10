@@ -44,7 +44,7 @@ public class IconButton {
         animate.update().setReversed(!isHovered(mouseX, mouseY));
 
         Helper2D.drawRoundedRectangle(x, y, w, h, 2,
-                new Color(255, 255, 255, animate.getValueI() + 30).getRGB(),
+		        new Color(13, 51, 128, 255).getRGB(),
                 Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled() ? 0 : -1
         );
 

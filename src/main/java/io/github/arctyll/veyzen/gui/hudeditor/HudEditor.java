@@ -99,7 +99,7 @@ public class HudEditor extends GuiScreen {
         );
         Helper2D.drawPicture(
                 width / 2 - 25,
-                height / 2 - 8 - animateLogo.getValueI(),
+                height / 2 - 10 - animateLogo.getValueI(),
                 50, 50, Style.getColor(70).getRGB(), "veyzenlogo.png"
         );
         GLHelper.endScissor();

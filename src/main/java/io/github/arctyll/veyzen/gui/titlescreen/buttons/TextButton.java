@@ -44,7 +44,7 @@ public class TextButton {
         animate.update().setReversed(!isHovered(mouseX, mouseY));
 
         Helper2D.drawRoundedRectangle(x, y, w, h, 2,
-                new Color(255, 255, 255, animate.getValueI() + 30).getRGB(),
+				new Color(49, 51, 56, 255).getRGB(),
                 Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled() ? 0 : -1
         );
 
@@ -52,7 +52,7 @@ public class TextButton {
                 text,
                 x + w / 2f - Veyzen.INSTANCE.fontHelper.size20.getStringWidth(text) / 2f,
                 y + h / 2f - 4,
-                -1
+                0xffffffff
         );
     }
 

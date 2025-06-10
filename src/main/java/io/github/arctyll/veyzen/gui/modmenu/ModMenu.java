@@ -23,12 +23,10 @@ public class ModMenu extends GuiScreen {
 
     private final Panel panel = new Panel();
 	
-    private final Animate animateModMenu = new Animate();
-    private final Animate animateClock = new Animate();
+	private final Animate animateClock = new Animate();
     private final Animate animateSnapping = new Animate();
 
     public ModMenu() {
-        animateModMenu.setEase(Easing.CUBIC_OUT).setMin(0).setSpeed(1000).setReversed(false);
         animateClock.setEase(Easing.CUBIC_OUT).setMin(0).setMax(50).setSpeed(100).setReversed(false);
         animateSnapping.setEase(Easing.CUBIC_IN).setMin(0).setMax(50).setSpeed(100).setReversed(false);
     }
@@ -47,13 +45,7 @@ public class ModMenu extends GuiScreen {
         boolean roundedCorners = Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled();
         int color = Veyzen.INSTANCE.optionManager.getOptionByName("Color").getColor().getRGB();
 
-        float max = ResolutionHelper.getHeight() / 2f + 150;
-        animateModMenu.setMax(max).update();
-        if(!animateModMenu.hasFinished()) {
-            panel.setY(height - animateModMenu.getValueI());
-        }
         panel.renderPanel(mouseX, mouseY);
-        panel.updatePosition(mouseX, mouseY);
 
         /*
         Draws the time at the top right

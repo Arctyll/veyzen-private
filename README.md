@@ -4,17 +4,17 @@
 Veyzen Client is an open source Minecraft PVP Client for 1.8.9 using the Forge API.
 
 ## Downloading
-- Download the mod from the Releases section here
+- Download the mod from the Releases section [here](https://github.com/Arctyll/VeyzenClient/releases)!
 
 ## Screenshots
 ### TitleScreen
 ![TitleScreen](/screenshots/TitleScreen.png)
 
 ### HudEditor
-![TitleScreen](/screenshots/HudEditor.png)
+![HudEditor](/screenshots/HudEditor.png)
 
 ### ModMenu
-![TitleScreen](/screenshots/ModMenu.png)
+![ModMenu](/screenshots/ModMenu.png)
 ## Workspace Setup
 1. Clone or download the repository either using git or the zip download.
 2. Open the folder, either `1.7.10\cloudclient` or `1.8.9\cloudclient` and copy the path.

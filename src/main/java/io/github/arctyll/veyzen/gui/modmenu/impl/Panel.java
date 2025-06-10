@@ -339,7 +339,7 @@ public class Panel {
 
     public void initGui() {
         setX(ResolutionHelper.getWidth() / 2 - (getW() / 2));
-		setY(40);
+		setY(20);
     }
 
     /**

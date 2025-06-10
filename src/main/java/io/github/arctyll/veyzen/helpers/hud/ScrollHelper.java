@@ -24,25 +24,31 @@ public class ScrollHelper {
     public void update() {
         animate.update();
         calculatedScroll = direction ?
-                scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize :
-                scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
+			scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize :
+			scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
     }
 
     public void updateScroll() {
         int scroll = Mouse.getDWheel();
+
         if (scroll > 0) {
-            if (scrollStep * scrollStepSize < minScroll) {
-                scrollStep++;
+            if (scrollStep > minScroll) {
+                scrollStep--;
                 direction = true;
                 animate.reset();
             }
         } else if (scroll < 0) {
-            if ((scrollStep * scrollStepSize + height) > maxScroll) {
-                scrollStep--;
+            if ((scrollStep * scrollStepSize) + height < maxScroll) {
+                scrollStep++;
                 direction = false;
                 animate.reset();
             }
         }
+
+        animate.update();
+        calculatedScroll = direction ?
+			scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize :
+			scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
     }
 
     public float getScrollStep() {

@@ -100,8 +100,8 @@ public class TitleScreen extends Panorama {
 
     private void drawLogo() {
         GlyphPageFontRenderer fontRenderer = Veyzen.INSTANCE.fontHelper.size40;
-        fontRenderer.drawString(Veyzen.modName, width / 2f - fontRenderer.getStringWidth(Veyzen.modName) / 2f, height / 2f - 27.5f, -1);
-        Helper2D.drawPicture(width / 2 - 30, height / 2 - 78, 60, 60, 0x40ffffff, "veyzenlogo.png");
+        fontRenderer.drawString(Veyzen.modName, width / 2f - fontRenderer.getStringWidth(Veyzen.modName) / 2f, height / 2f - 27.5f, 0xffffffff);
+        Helper2D.drawPicture(width / 2 - 30, height / 2 - 80, 60, 60, 0xffffffff, "veyzenlogo.png");
     }
 
     /**
@@ -112,7 +112,7 @@ public class TitleScreen extends Panorama {
         GlyphPageFontRenderer fontRenderer = Veyzen.INSTANCE.fontHelper.size20;
         String copyright = "Copyright Mojang Studios. Do not distribute!";
         String text = Veyzen.modName + " Client " + Veyzen.modVersion;
-        fontRenderer.drawString(copyright, width - fontRenderer.getStringWidth(copyright) - 2, height - fontRenderer.getFontHeight(), 0x50ffffff);
-        fontRenderer.drawString(text, 4, height - fontRenderer.getFontHeight(), 0x50ffffff);
+        fontRenderer.drawString(copyright, width - fontRenderer.getStringWidth(copyright) - 2, height - fontRenderer.getFontHeight(), 0xffffffff);
+        fontRenderer.drawString(text, 4, height - fontRenderer.getFontHeight(), 0xffffffff);
     }
 }

@@ -8,19 +8,29 @@ package io.github.arctyll.veyzen.feature.option;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
+import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
+import java.io.*;
 
 public class OptionManager {
 
     public ArrayList<Option> optionList  = new ArrayList<>();
+	private Font outfit;
 	
     public OptionManager() {
         init();
     }
 
     public void init() {
+		try {
+			outfit = Font.createFont(Font.TRUETYPE_FONT, OptionManager.class.getResourceAsStream("/assets/veyzen/fonts/Outfit.ttf"));
+			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(outfit);
+		} catch (IOException | FontFormatException e) {
+			e.printStackTrace();
+		}
+		
         addOption(new Option("Style"));
-        addOption(new Option("Font Changer", "Arial", 0,
+        addOption(new Option("Font Changer", outfit.getFontName(), 0,
 				GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
         addOption(new Option("Color", new Color(255, 255, 255), new Color(255, 0, 0), 0, new float[]{0, 0}));
 

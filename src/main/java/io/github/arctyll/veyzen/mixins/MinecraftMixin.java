@@ -32,27 +32,4 @@ public abstract class MinecraftMixin {
         lastFrame = currentTime;
         DeltaTime.setDeltaTime(deltaTime);
     }
-	
-	@Inject(method = "drawSplashScreen", at = @At("HEAD"), cancellable = true)
-    private void drawSplashScreen(TextureManager tm, CallbackInfo ci) {
-        Minecraft mc = Minecraft.getMinecraft();
-		ScaledResolution scaledResolution = new ScaledResolution(mc);
-        int width = scaledResolution.getScaledWidth();
-        int height = scaledResolution.getScaledHeight();
-
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        Helper2D.drawRectangle(0, 0, width, height, new Color(49, 51, 56, 255).getRGB());
-
-        int logoWidth = 512;
-        int logoHeight = 256;
-        int x = (width - logoWidth) / 2;
-        int y = (height - logoHeight) / 2;
-        Helper2D.drawPicture(x, y, logoWidth, logoHeight, 0xffffffff, "veyzenlogo.png");
-
-        mc.getFramebuffer().bindFramebuffer(true);
-        mc.getFramebuffer().framebufferRender(width, height);
-        GL11.glFlush();
-
-        ci.cancel();
-    }
 }

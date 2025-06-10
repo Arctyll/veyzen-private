@@ -23,6 +23,7 @@ import org.lwjgl.opengl.Display;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import net.minecraftforge.fml.client.*;
 
 @Mod(
         modid = Veyzen.modID,

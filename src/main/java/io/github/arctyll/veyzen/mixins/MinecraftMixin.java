@@ -5,13 +5,17 @@
 
 package io.github.arctyll.veyzen.mixins;
 
-import io.github.arctyll.veyzen.helpers.animation.DeltaTime;
-import net.minecraft.client.Minecraft;
-import org.lwjgl.Sys;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import io.github.arctyll.veyzen.helpers.animation.*;
+import io.github.arctyll.veyzen.helpers.render.*;
+import java.awt.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.texture.*;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
@@ -27,5 +31,28 @@ public abstract class MinecraftMixin {
         int deltaTime = (int) (currentTime - lastFrame);
         lastFrame = currentTime;
         DeltaTime.setDeltaTime(deltaTime);
+    }
+	
+	@Inject(method = "drawSplashScreen", at = @At("HEAD"), cancellable = true)
+    private void drawSplashScreen(TextureManager tm, CallbackInfo ci) {
+        Minecraft mc = Minecraft.getMinecraft();
+		ScaledResolution scaledResolution = new ScaledResolution(mc);
+        int width = scaledResolution.getScaledWidth();
+        int height = scaledResolution.getScaledHeight();
+
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+        Helper2D.drawRectangle(0, 0, width, height, new Color(49, 51, 56, 255).getRGB());
+
+        int logoWidth = 512;
+        int logoHeight = 256;
+        int x = (width - logoWidth) / 2;
+        int y = (height - logoHeight) / 2;
+        Helper2D.drawPicture(x, y, logoWidth, logoHeight, 0xffffffff, "veyzenlogo.png");
+
+        mc.getFramebuffer().bindFramebuffer(true);
+        mc.getFramebuffer().framebufferRender(width, height);
+        GL11.glFlush();
+
+        ci.cancel();
     }
 }

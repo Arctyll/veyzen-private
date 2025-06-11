@@ -72,7 +72,8 @@ public abstract class GuiUtilsMixin {
         float scroll;
         float newToolTipHeight = tooltipHeight + 20;
         if (shouldScroll && Veyzen.INSTANCE.modManager.getMod("ScrollTooltips").isToggled()) {
-            scrollHelper.updateScroll();
+			int scrollInt = org.lwjgl.input.Mouse.getDWheel();
+            scrollHelper.updateScroll(scrollInt);
             scrollHelper.setHeight(newToolTipHeight);
             scrollHelper.setMaxScroll(screenHeight);
             scroll = scrollHelper.getCalculatedScroll() + (newToolTipHeight - screenHeight);

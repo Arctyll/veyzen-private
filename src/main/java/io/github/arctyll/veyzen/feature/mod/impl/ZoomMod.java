@@ -44,7 +44,8 @@ public class ZoomMod extends Mod {
         scrollHelper.update();
 
         if (zoom && Veyzen.INSTANCE.mc.currentScreen == null) {
-            scrollHelper.updateScroll();
+            int scrollInt = org.lwjgl.input.Mouse.getDWheel();
+            scrollHelper.updateScroll(scrollInt);
         } else {
             scrollHelper.setScrollStep(0);
         }

@@ -2,7 +2,6 @@ package io.github.arctyll.veyzen.helpers.hud;
 
 import io.github.arctyll.veyzen.helpers.animation.Animate;
 import io.github.arctyll.veyzen.helpers.animation.Easing;
-import org.lwjgl.input.Mouse;
 
 public class ScrollHelper {
 
@@ -16,21 +15,18 @@ public class ScrollHelper {
     public ScrollHelper(int minScroll, int maxScroll, int scrollStepSize, int speed) {
         this.minScroll = minScroll;
         this.maxScroll = maxScroll;
-        this.height = 0;
         this.scrollStepSize = scrollStepSize;
         animate.setEase(Easing.CUBIC_IN_OUT).setMin(0).setMax(scrollStepSize).setSpeed(speed);
     }
 
     public void update() {
         animate.update();
-        calculatedScroll = direction ?
-			scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize :
-			scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
+        calculatedScroll = direction
+			? scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize
+			: scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
     }
 
-    public void updateScroll() {
-        int scroll = Mouse.getDWheel();
-
+    public void updateScroll(int scroll) {
         if (scroll > 0) {
             if (scrollStep > minScroll) {
                 scrollStep--;
@@ -38,7 +34,7 @@ public class ScrollHelper {
                 animate.reset();
             }
         } else if (scroll < 0) {
-            if ((scrollStep * scrollStepSize) + height < maxScroll) {
+            if ((scrollStep + 1) * scrollStepSize < maxScroll - height) {
                 scrollStep++;
                 direction = false;
                 animate.reset();
@@ -46,9 +42,9 @@ public class ScrollHelper {
         }
 
         animate.update();
-        calculatedScroll = direction ?
-			scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize :
-			scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
+        calculatedScroll = direction
+			? scrollStep * scrollStepSize + animate.getValueF() - scrollStepSize
+			: scrollStep * scrollStepSize - animate.getValueF() + scrollStepSize;
     }
 
     public float getScrollStep() {

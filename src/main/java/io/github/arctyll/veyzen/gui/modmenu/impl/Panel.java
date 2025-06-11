@@ -128,7 +128,7 @@ public class Panel {
 	 * @param mouseX The current X position of the mouse
 	 * @param mouseY The current Y position of the mouse
 	 */
-	 
+
 	public void renderPanel(int mouseX, int mouseY) {
 		final boolean roundedCorners = Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled();
 		final int color = Veyzen.INSTANCE.optionManager.getOptionByName("Color").getColor().getRGB();
@@ -192,24 +192,18 @@ public class Panel {
 
 			textBox.renderTextBox(x + w - textBox.getW() - 5, y + h + TEXTBOX_OFFSET_Y, mouseX, mouseY);
 
-			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
-				int height = 0;
-				int index = 0;
-				for (Button button : buttonList) {
-					if (index % 4 == 0) height += button.getH() + 3;
-					index++;
-				}
-				scrollHelperMods.setHeight(height);
-				scrollHelperMods.updateScroll();
+			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y * 2, w, h + OPTIONS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
+				scrollHelperMods.updateScroll(Mouse.getDWheel());
+			}
+			scrollHelperMods.update();
 
-				index = 0;
-				int count = 0;
-				for (Button button : buttonList) {
-					float position = scrollHelperMods.getCalculatedScroll() + count * (button.getH() + 3);
-					button.setY((int) position);
-					index++;
-					if (index % 4 == 0) count++;
-				}
+			int index = 0;
+			int count = 0;
+			for (Button button : buttonList) {
+				float position = scrollHelperMods.getCalculatedScroll() + count * (button.getH() + 3);
+				button.setY((int) position);
+				index++;
+				if (index % 4 == 0) count++;
 			}
 
 			GLHelper.startScissor(x, y + TAB_OFFSET_Y * 2, w, h + OPTIONS_AREA_EXTRA_HEIGHT);
@@ -217,21 +211,18 @@ public class Panel {
 				button.renderButton(mouseX, mouseY);
 			}
 			GLHelper.endScissor();
+
 		} else if (selected == 1) {
 			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
-				int height = 0;
-				for (Options option : optionsList) {
-					height += option.getH();
-				}
-				scrollHelperOptions.setHeight(height);
-				scrollHelperOptions.updateScroll();
+				scrollHelperOptions.updateScroll(Mouse.getDWheel());
+			}
+			scrollHelperOptions.update();
 
-				height = 0;
-				for (Options option : optionsList) {
-					float position = height + scrollHelperOptions.getCalculatedScroll() + 10;
-					option.setY((int) position);
-					height += option.getH();
-				}
+			int height = 0;
+			for (Options option : optionsList) {
+				float position = height + scrollHelperOptions.getCalculatedScroll() + 10;
+				option.setY((int) position);
+				height += option.getH();
 			}
 
 			GLHelper.startScissor(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT);

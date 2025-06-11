@@ -179,7 +179,8 @@ public class Button {
                         height += settings.getH();
                     }
                     scrollHelper.setHeight(height);
-                    scrollHelper.updateScroll();
+				    int scrollInt = org.lwjgl.input.Mouse.getDWheel();
+				    scrollHelper.updateScroll(scrollInt);
 
                     height = 0;
                     for (Settings settings : settingsList) {

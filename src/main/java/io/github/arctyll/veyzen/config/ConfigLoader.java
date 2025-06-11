@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022 DupliCAT
- * GNU Lesser General Public License v3.0
- */
-
 package io.github.arctyll.veyzen.config;
 
 import com.google.gson.Gson;
@@ -19,99 +14,80 @@ import java.io.FileReader;
 
 public class ConfigLoader {
 
-    /**
-     * Loads the config from .minecraft/veyzen/config.json
-     */
-
     public static void loadConfig() throws FileNotFoundException {
         FileReader reader = new FileReader(OSHelper.getVeyzenDirectory() + "config.json");
 
         Config config = new Gson().fromJson(reader, Config.class);
 
-        for (int i = 0; i < config.getConfig().size(); i++) {
-            Mod mod = Veyzen.INSTANCE.modManager.getMods().get(i);
-            mod.setToggled(config.getConfig().get(i).isToggled());
-            for (int j = 0; j < config.getConfig().get(i).getSettings().size(); j++) {
-                Setting configSetting = config.getConfig().get(i).getSettings().get(j);
-                Setting clientSetting = Veyzen.INSTANCE.settingManager.getSettingsByMod(mod).get(j);
-                switch (config.getConfig().get(i).getSettings().get(j).getMode()) {
+        for (ModConfig modConfig : config.getConfig()) {
+            Mod mod = Veyzen.INSTANCE.modManager.getMod(modConfig.getName());
+            if (mod == null) continue;
+
+            mod.setToggled(modConfig.isToggled());
+
+            for (Setting configSetting : modConfig.getSettings()) {
+                Setting clientSetting = Veyzen.INSTANCE.settingManager.getSettingByModAndName(mod.getName(), configSetting.getName());
+                if (clientSetting == null) continue;
+
+                switch (configSetting.getMode()) {
                     case "CheckBox":
-                        boolean toggled = configSetting.isCheckToggled();
-                        clientSetting.setCheckToggled(toggled);
+                        clientSetting.setCheckToggled(configSetting.isCheckToggled());
                         break;
                     case "Slider":
-                        float amount = configSetting.getCurrentNumber();
-                        clientSetting.setCurrentNumber(amount);
+                        clientSetting.setCurrentNumber(configSetting.getCurrentNumber());
                         break;
                     case "ModePicker":
-                        String mode = configSetting.getCurrentMode();
-                        int index = configSetting.getModeIndex();
-                        clientSetting.setCurrentMode(mode);
-                        clientSetting.setModeIndex(index);
+                        clientSetting.setCurrentMode(configSetting.getCurrentMode());
+                        clientSetting.setModeIndex(configSetting.getModeIndex());
                         break;
                     case "ColorPicker":
-                        Color color = configSetting.getColor();
-                        Color sideColor = configSetting.getSideColor();
-                        float sideSlider = configSetting.getSideSlider();
-                        float[] mainSlider = configSetting.getMainSlider();
-                        clientSetting.setColor(color);
-                        clientSetting.setSideColor(sideColor);
-                        clientSetting.setSideSlider(sideSlider);
-                        clientSetting.setMainSlider(mainSlider);
+                        clientSetting.setColor(configSetting.getColor());
+                        clientSetting.setSideColor(configSetting.getSideColor());
+                        clientSetting.setSideSlider(configSetting.getSideSlider());
+                        clientSetting.setMainSlider(configSetting.getMainSlider());
                         break;
                     case "CellGrid":
-                        boolean[][] cells = configSetting.getCells();
-                        clientSetting.setCells(cells);
+                        clientSetting.setCells(configSetting.getCells());
                         break;
                     case "Keybinding":
-                        int key = configSetting.getKey();
-                        clientSetting.setKey(key);
+                        clientSetting.setKey(configSetting.getKey());
                         break;
                 }
             }
 
-            if (Veyzen.INSTANCE.hudEditor.getHudMod(mod.getName()) != null) {
-                Veyzen.INSTANCE.hudEditor.getHudMod(mod.getName()).setX(config.getConfig().get(i).getPositions()[0]);
-                Veyzen.INSTANCE.hudEditor.getHudMod(mod.getName()).setY(config.getConfig().get(i).getPositions()[1]);
-                Veyzen.INSTANCE.hudEditor.getHudMod(mod.getName()).setSize(config.getConfig().get(i).getSize());
+            if (Veyzen.INSTANCE.hudEditor.getHudMod(modConfig.getName()) != null) {
+                Veyzen.INSTANCE.hudEditor.getHudMod(modConfig.getName()).setX(modConfig.getPositions()[0]);
+                Veyzen.INSTANCE.hudEditor.getHudMod(modConfig.getName()).setY(modConfig.getPositions()[1]);
+                Veyzen.INSTANCE.hudEditor.getHudMod(modConfig.getName()).setSize(modConfig.getSize());
             }
         }
 
-        for(int i = 0; i < config.getOptionsConfigList().size(); i++){
-            Option configOption = config.getOptionsConfigList().get(i);
-            Option clientOption = Veyzen.INSTANCE.optionManager.getOptions().get(i);
+        for (Option configOption : config.getOptionsConfigList()) {
+            Option clientOption = Veyzen.INSTANCE.optionManager.getOptionByName(configOption.getName());
+            if (clientOption == null) continue;
+
             switch (configOption.getMode()) {
                 case "CheckBox":
-                    boolean toggled = configOption.isCheckToggled();
-                    clientOption.setCheckToggled(toggled);
+                    clientOption.setCheckToggled(configOption.isCheckToggled());
                     break;
                 case "Slider":
-                    float amount = configOption.getCurrentNumber();
-                    clientOption.setCurrentNumber(amount);
+                    clientOption.setCurrentNumber(configOption.getCurrentNumber());
                     break;
                 case "ModePicker":
-                    String mode = configOption.getCurrentMode();
-                    int index = configOption.getModeIndex();
-                    clientOption.setCurrentMode(mode);
-                    clientOption.setModeIndex(index);
+                    clientOption.setCurrentMode(configOption.getCurrentMode());
+                    clientOption.setModeIndex(configOption.getModeIndex());
                     break;
                 case "ColorPicker":
-                    Color color = configOption.getColor();
-                    Color sideColor = configOption.getSideColor();
-                    float sideSlider = configOption.getSideSlider();
-                    float[] mainSlider = configOption.getMainSlider();
-                    clientOption.setColor(color);
-                    clientOption.setSideColor(sideColor);
-                    clientOption.setSideSlider(sideSlider);
-                    clientOption.setMainSlider(mainSlider);
+                    clientOption.setColor(configOption.getColor());
+                    clientOption.setSideColor(configOption.getSideColor());
+                    clientOption.setSideSlider(configOption.getSideSlider());
+                    clientOption.setMainSlider(configOption.getMainSlider());
                     break;
                 case "CellGrid":
-                    boolean[][] cells = configOption.getCells();
-                    clientOption.setCells(cells);
+                    clientOption.setCells(configOption.getCells());
                     break;
                 case "Keybinding":
-                    int key = configOption.getKey();
-                    clientOption.setKey(key);
+                    clientOption.setKey(configOption.getKey());
                     break;
             }
         }

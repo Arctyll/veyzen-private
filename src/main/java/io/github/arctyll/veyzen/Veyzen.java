@@ -38,7 +38,7 @@ public class Veyzen {
 
     public static final String modID = "veyzen";
     public static final String modName = "Veyzen";
-    public static final String modVersion = "1.0 [1.8.9]";
+    public static final String modVersion = "1.0-beta [1.8.9]";
 
     public Minecraft mc = Minecraft.getMinecraft();
 

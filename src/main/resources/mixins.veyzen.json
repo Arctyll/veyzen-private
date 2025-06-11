@@ -12,6 +12,7 @@
     "GuiScreenMixin",
     "ItemRendererMixin",
     "MinecraftMixin",
+    "SplashScreenMixins",
     "ModelBipedMixin",
     "RendererLivingEntityMixin",
     "RenderMixin"

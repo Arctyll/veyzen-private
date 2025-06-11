@@ -33,10 +33,4 @@ public abstract class MinecraftMixin {
         lastFrame = currentTime;
         DeltaTime.setDeltaTime(deltaTime);
     }
-	
-	@Inject(method = "drawSplashScreen", at = @At("HEAD"), cancellable = true)
-    public void overrideSplash(TextureManager textureManagerInstance, CallbackInfo ci) {
-    	new GuiSplashScreen().draw();
-    	ci.cancel();
-    }
 }

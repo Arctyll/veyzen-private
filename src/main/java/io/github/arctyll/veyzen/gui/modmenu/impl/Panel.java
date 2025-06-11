@@ -23,6 +23,8 @@ import io.github.arctyll.veyzen.helpers.animation.Animate;
 import io.github.arctyll.veyzen.helpers.animation.Easing;
 
 import java.util.ArrayList;
+import java.io.*;
+import org.lwjgl.input.*;
 
 public class Panel {
 
@@ -126,6 +128,7 @@ public class Panel {
 	 * @param mouseX The current X position of the mouse
 	 * @param mouseY The current Y position of the mouse
 	 */
+	 
 	public void renderPanel(int mouseX, int mouseY) {
 		final boolean roundedCorners = Veyzen.INSTANCE.optionManager.getOptionByName("Rounded Corners").isCheckToggled();
 		final int color = Veyzen.INSTANCE.optionManager.getOptionByName("Color").getColor().getRGB();
@@ -163,9 +166,7 @@ public class Panel {
 		Veyzen.INSTANCE.fontHelper.size40.drawString(Veyzen.modName, x + 37, y + 6, color);
 
 		animateTransition.update();
-		scrollHelperMods.update();
-		scrollHelperOptions.update();
-
+		animateSideBar.update();
 		Veyzen.INSTANCE.messageHelper.renderMessage();
 
 		if (selected == 0) {
@@ -191,47 +192,37 @@ public class Panel {
 
 			textBox.renderTextBox(x + w - textBox.getW() - 5, y + h + TEXTBOX_OFFSET_Y, mouseX, mouseY);
 
-			GLHelper.startScissor(x, y + TAB_OFFSET_Y * 2, w, h + OPTIONS_AREA_EXTRA_HEIGHT);
-			for (Button button : buttonList) {
-				button.renderButton(mouseX, mouseY);
-			}
-			GLHelper.endScissor();
-
 			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
 				int height = 0;
 				int index = 0;
-
 				for (Button button : buttonList) {
 					if (index % 4 == 0) height += button.getH() + 3;
 					index++;
 				}
-
 				scrollHelperMods.setHeight(height);
 				scrollHelperMods.updateScroll();
 
 				index = 0;
 				int count = 0;
 				for (Button button : buttonList) {
-					float position = scrollHelperMods.getCalculatedScroll();
-					position += count * (button.getH() + 3);
+					float position = scrollHelperMods.getCalculatedScroll() + count * (button.getH() + 3);
 					button.setY((int) position);
 					index++;
 					if (index % 4 == 0) count++;
 				}
 			}
-		} else if (selected == 1) {
-			GLHelper.startScissor(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT);
-			for (Options option : optionsList) {
-				option.renderOption(mouseX, mouseY);
+
+			GLHelper.startScissor(x, y + TAB_OFFSET_Y * 2, w, h + OPTIONS_AREA_EXTRA_HEIGHT);
+			for (Button button : buttonList) {
+				button.renderButton(mouseX, mouseY);
 			}
 			GLHelper.endScissor();
-
+		} else if (selected == 1) {
 			if (MathHelper.withinBox(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT, mouseX, mouseY)) {
 				int height = 0;
 				for (Options option : optionsList) {
 					height += option.getH();
 				}
-
 				scrollHelperOptions.setHeight(height);
 				scrollHelperOptions.updateScroll();
 
@@ -242,9 +233,13 @@ public class Panel {
 					height += option.getH();
 				}
 			}
-		}
 
-		animateSideBar.update();
+			GLHelper.startScissor(x, y + TAB_OFFSET_Y, w, h + MODS_AREA_EXTRA_HEIGHT);
+			for (Options option : optionsList) {
+				option.renderOption(mouseX, mouseY);
+			}
+			GLHelper.endScissor();
+		}
 
 		Helper2D.drawRoundedRectangle(x - 50, y, 40, h + 300, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
 

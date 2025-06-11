@@ -16,6 +16,7 @@ import org.lwjgl.opengl.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
+import io.github.arctyll.veyzen.gui.*;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftMixin {
@@ -31,5 +32,11 @@ public abstract class MinecraftMixin {
         int deltaTime = (int) (currentTime - lastFrame);
         lastFrame = currentTime;
         DeltaTime.setDeltaTime(deltaTime);
+    }
+	
+	@Inject(method = "drawSplashScreen", at = @At("HEAD"), cancellable = true)
+    public void overrideSplash(TextureManager textureManagerInstance, CallbackInfo ci) {
+    	new GuiSplashScreen().draw();
+    	ci.cancel();
     }
 }

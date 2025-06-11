@@ -27,6 +27,7 @@ import org.lwjgl.input.Mouse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.*;
+import io.github.arctyll.veyzen.config.*;
 
 public class HudEditor extends GuiScreen {
 
@@ -205,36 +206,54 @@ public class HudEditor extends GuiScreen {
 	 */
 
 	@Override  
-	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {  
-		for (HudMod hudMod : hudModList) {  
-			if (hudMod.withinMod(mouseX, mouseY) && mouseButton == 0) {  
-				hudMod.setDragging(true);  
-				hudMod.setOffsetX(mouseX - hudMod.getX());  
-				hudMod.setOffsetY(mouseY - hudMod.getY());  
-			}  
-		}  
+	public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+		for (HudMod hudMod : hudModList) {
+			if (hudMod.withinMod(mouseX, mouseY) && mouseButton == 0) {
+				hudMod.setDragging(true);
+				hudMod.setOffsetX(mouseX - hudMod.getX());
+				hudMod.setOffsetY(mouseY - hudMod.getY());
+			}
+		}
 
-		if (mouseButton == 0) {  
-			if (MathHelper.withinBox(width / 2 - 50, height / 2 - 6, 100, 20, mouseX, mouseY)) {  
-				mc.displayGuiScreen(new ModMenu());  
-			}  
+		if (mouseButton == 0) {
+			if (MathHelper.withinBox(width / 2 - 50, height / 2 - 6, 100, 20, mouseX, mouseY)) {
+				mc.displayGuiScreen(new ModMenu());
+			}
 
-			if (MathHelper.withinBox(10, height - 50, 40, 40, mouseX, mouseY)) {  
-				Style.setDarkMode(!Style.isDarkMode());  
-			} else if (MathHelper.withinBox(60, height - 50, 40, 40, mouseX, mouseY)) {  
-				Style.setSnapping(!Style.isSnapping());  
-			}  
-		}  
-		super.mouseClicked(mouseX, mouseY, mouseButton);  
+			if (MathHelper.withinBox(10, height - 50, 40, 40, mouseX, mouseY)) {
+				Style.setDarkMode(!Style.isDarkMode());
+				try {
+					ConfigSaver.saveConfig();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if (MathHelper.withinBox(60, height - 50, 40, 40, mouseX, mouseY)) {
+				Style.setSnapping(!Style.isSnapping());
+				try {
+					ConfigSaver.saveConfig();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
-	
-    @Override
-    public void mouseReleased(int mouseX, int mouseY, int state) {
-        for (HudMod hudMod : hudModList) {
-            hudMod.setDragging(false);
-        }
-        super.mouseReleased(mouseX, mouseY, state);
-    }
+
+	@Override
+	public void mouseReleased(int mouseX, int mouseY, int state) {
+		for (HudMod hudMod : hudModList) {
+			hudMod.setDragging(false);
+		}
+
+		try {
+			ConfigSaver.saveConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		super.mouseReleased(mouseX, mouseY, state);
+	}
 
     /**
      * Loads a shader to blur the screen when the gui is opened

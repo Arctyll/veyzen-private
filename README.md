@@ -4,7 +4,7 @@
 Veyzen Client is an open source Minecraft PVP Client for 1.8.9 using the Forge API.
 
 ## Downloading
-- Download the mod from the Releases section [here](https://github.com/Arctyll/VeyzenClient/releases)!
+- Download the mod from the Releases section [here](https://github.com/Arctyll/Veyzen/releases)!
 
 ## Screenshots
 ### TitleScreen
@@ -17,12 +17,11 @@ Veyzen Client is an open source Minecraft PVP Client for 1.8.9 using the Forge A
 ![ModMenu](/screenshots/ModMenu.png)
 ## Workspace Setup
 1. Clone or download the repository either using git or the zip download.
-2. Open the folder, either `1.7.10\cloudclient` or `1.8.9\cloudclient` and copy the path.
-3. Open a command proment or terminal and change the directory to the copied path.
+2. Open a command proment or terminal and change the directory to Veyzen's folder.
 ```
-cd C:\User\Desktop\cloudclient-main\<version>\cloudclient
+cd C:\User\Desktop\Veyzen
 ```
-4. Creating the workspace for your IDE <br>
+3. Creating the workspace for your IDE <br>
 - IntelliJ IDEA
 ```
 gradlew setupDecompWorkspace idea
@@ -31,16 +30,16 @@ gradlew setupDecompWorkspace idea
 ```
 gradlew setupDecompWorkspace eclipse
 ```
-5. Open the project with your preferred IDE. Don't import it as a gradle project.
-6. To get Mixins working in a Dev Environment, add the args below, to your program arguments.
+4. Open the project with your preferred IDE. Don't import it as a gradle project.
+5. To get Mixins working in a Dev Environment, add the args below, to your program arguments.
 ```
---tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.cloudmc.json
+--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.veyzen.json
 ```
 
 ## Building
-1. Open a command proment or terminal and change the directory to the VeyzenClient's folder.
+1. Open a command proment or terminal and change the directory to the Veyzen's folder.
 ```
-cd C:\User\Desktop\VeyzenClient
+cd C:\User\Desktop\Veyzen
 ```
 2. Make a build
 ```
@@ -48,7 +47,7 @@ gradlew build
 ```
 You will find the new build in
 ```
-C:\User\Desktop\VeyzenClient\build\libs
+C:\User\Desktop\Veyzen\build\libs
 ```
 3. Copy the .jar file and paste it into your mods folder and launch forge for your version.
 

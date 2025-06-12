@@ -3,6 +3,9 @@
 # Veyzen Client
 Veyzen Client is an open source Minecraft PVP Client for 1.8.9 using the Forge API.
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Arctyll/Veyzen/build.yml)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Arctyll/Veyzen/total)
+
 ## Downloading
 - Download the mod from the Releases section [here](https://github.com/Arctyll/Veyzen/releases)!
 

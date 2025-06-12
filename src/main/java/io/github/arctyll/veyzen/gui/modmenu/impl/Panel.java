@@ -150,7 +150,7 @@ public class Panel {
 		final int CLOSE_BUTTON_SIZE = 20;
 		final int CLOSE_BUTTON_MARGIN = 5;
 
-		Helper2D.drawRoundedRectangle(x, y, w, h, 2, PANEL.getRGB(), 2);
+		Helper2D.drawRoundedRectangle(x, y, w, h, 2, PANEL.getRGB(), 1);
 
 		Helper2D.drawRoundedRectangle(
 			x,
@@ -159,7 +159,7 @@ public class Panel {
 			selected == 1 ? h + MODS_AREA_EXTRA_HEIGHT : h + OPTIONS_AREA_EXTRA_HEIGHT,
 			2,
 			BACKGROUND.getRGB(),
-			2
+			-1
 		);
 
 		if (selected == 0) {

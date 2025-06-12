@@ -123,7 +123,7 @@ public class Button {
             Veyzen.INSTANCE.fontHelper.size20.drawString(mod.getName(), panel.getX() + 10 + x, panel.getY() + panel.getH() + y + 97, color);
 
 			int toggleBackgroundColor = mod.isToggled()
-				? new Color(20, 82, 204, 255).getRGB()
+				? new Color(3, 152, 85).getRGB()
 				: new Color(42, 44, 48, 255).getRGB();
 
 			int toggleKnobColor = Color.WHITE.getRGB();

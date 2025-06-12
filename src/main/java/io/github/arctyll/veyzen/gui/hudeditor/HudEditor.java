@@ -190,7 +190,7 @@ public class HudEditor extends GuiScreen {
 		}  
 
 		animateSnapping.update();  
-		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 230).getRGB(), roundedCorners ? 0 : -1);
+		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 4, new Color(25, 103, 255, 230).getRGB(), roundedCorners ? 0 : -1);
 		Helper2D.drawPicture(15, height + 5 - animateSnapping.getValueI(), 30, 30, Color.WHITE.getRGB(), Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
 	}
 

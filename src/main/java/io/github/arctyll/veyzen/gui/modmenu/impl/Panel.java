@@ -347,8 +347,8 @@ public class Panel {
     }
 
     public void initGui() {
-        setX((ResolutionHelper.getWidth() / 2 - (getW() / 2)) - 20);
-		setY(15);
+        setX(ResolutionHelper.getWidth() / 2 - (getW() / 2));
+		setY(ResolutionHelper.getHeight() / 2 - (getH() / 2));
     }
 
     /**

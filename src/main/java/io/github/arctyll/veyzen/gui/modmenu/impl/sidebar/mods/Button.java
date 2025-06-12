@@ -122,15 +122,30 @@ public class Button {
 
             Veyzen.INSTANCE.fontHelper.size20.drawString(mod.getName(), panel.getX() + 10 + x, panel.getY() + panel.getH() + y + 97, color);
 
-            Helper2D.drawRoundedRectangle(panel.getX() + 13 + x + 77, panel.getY() + panel.getH() + y + h + 14, 30, 15, 5, new Color(42, 44, 48, 255).getRGB(), roundedCorners ? 0 : -1);
-            Helper2D.drawRoundedRectangle(
-                    animButton.hasFinished() ?
-                            mod.isToggled() ?
-                                    panel.getX() + 13 + 15 + x + 77 :
-                                    panel.getX() + 13 + x + 77 :
-                            panel.getX() + 13 + animButton.getValueI() + x + 77,
-				panel.getY() + panel.getH() + y + h + 14, 15, 15, 5, new Color(255, 255, 255, 255).getRGB(), roundedCorners ? 0 : -1);
+			int toggleBackgroundColor = mod.isToggled()
+				? new Color(20, 82, 204, 255).getRGB()
+				: new Color(42, 44, 48, 255).getRGB();
 
+			int toggleKnobColor = Color.WHITE.getRGB();
+
+			Helper2D.drawRoundedRectangle(
+				panel.getX() + 13 + x + 77,
+				panel.getY() + panel.getH() + y + h + 14,
+				30, 15, 2,
+				toggleBackgroundColor,
+				roundedCorners ? 0 : -1
+			);
+			Helper2D.drawRoundedRectangle(
+				animButton.hasFinished() ?
+				mod.isToggled()
+				? panel.getX() + 13 + 15 + x + 77
+				: panel.getX() + 13 + x + 77
+				: panel.getX() + 13 + animButton.getValueI() + x + 77,
+				panel.getY() + panel.getH() + y + h + 14,
+				15, 15, 2,
+				toggleKnobColor,
+				roundedCorners ? 0 : -1
+			);
             Helper2D.drawPicture(panel.getX() + getX() + getW() / 2 - 12, panel.getY() + panel.getH() + getY() + 45, 35, 35, Color.WHITE.getRGB(), "icon/button/button/" + mod.getName().toLowerCase() + ".png");
         }
 

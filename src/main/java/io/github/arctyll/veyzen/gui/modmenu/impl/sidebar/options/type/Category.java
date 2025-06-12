@@ -26,7 +26,7 @@ public class Category extends Options {
                 panel.getY() + panel.getH() + getY() + 6,
                 0xffffffff
         );
-        Helper2D.drawRectangle(panel.getX() + 20, panel.getY() + panel.getH() + getY() + 20, panel.getW() - 40, 1, new Color(34, 35, 38, 255).getRGB());
+        Helper2D.drawRectangle(panel.getX() + 20, panel.getY() + panel.getH() + getY() + 20, panel.getW() - 40, 1, new Color(34, 35, 38, 230).getRGB());
     }
 
     @Override

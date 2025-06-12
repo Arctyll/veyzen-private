@@ -95,7 +95,7 @@ public class ModePicker extends Options {
                     Helper2D.drawRoundedRectangle(
                             panel.getX() + panel.getW() - 30 - longestString,
                             panel.getY() + panel.getH() + getY() + offset * 15 - option.getOptions().length * 15 + animateSelect.getValueI() + 20,
-				    		longestString + 10, 17, 2, new Color(20, 82, 204, 255).getRGB(),
+				    		longestString + 10, 17, 2, new Color(20, 82, 204, 123).getRGB(),
                             roundedCorners ? 0 : -1
                     );
                 }

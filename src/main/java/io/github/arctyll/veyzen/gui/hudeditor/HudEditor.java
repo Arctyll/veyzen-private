@@ -112,7 +112,7 @@ public class HudEditor extends GuiScreen {
             width / 2 - 50,  
             height / 2 - 6,  
             100, 20, 2,  
-            new Color(49, 51, 56, animate.getValueI() + 30).getRGB(),  
+            new Color(49, 51, 56, 255).getRGB(),  
             roundedCorners ? 0 : -1  
 		);  
 		Veyzen.INSTANCE.fontHelper.size20.drawString(  
@@ -190,7 +190,7 @@ public class HudEditor extends GuiScreen {
 		}  
 
 		animateSnapping.update();  
-		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
+		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 230).getRGB(), roundedCorners ? 0 : -1);
 		Helper2D.drawPicture(15, height + 5 - animateSnapping.getValueI(), 30, 30, Color.WHITE.getRGB(), Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
 	}
 
@@ -219,13 +219,6 @@ public class HudEditor extends GuiScreen {
 			}
 
 			if (MathHelper.withinBox(10, height - 50, 40, 40, mouseX, mouseY)) {
-				Style.setDarkMode(!Style.isDarkMode());
-				try {
-					ConfigSaver.saveConfig();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else if (MathHelper.withinBox(60, height - 50, 40, 40, mouseX, mouseY)) {
 				Style.setSnapping(!Style.isSnapping());
 				try {
 					ConfigSaver.saveConfig();

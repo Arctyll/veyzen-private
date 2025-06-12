@@ -60,9 +60,7 @@ public class ModMenu extends GuiScreen {
         Veyzen.INSTANCE.fontHelper.size40.drawString(TimeHelper.getFormattedTimeMinute(), width - 120, 10 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());
         Veyzen.INSTANCE.fontHelper.size20.drawString(TimeHelper.getFormattedDate(), width - 120, 30 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());
 
-        animateSnapping.update();  
-		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
-		Helper2D.drawPicture(15, height + 5 - animateSnapping.getValueI(), 30, 30, Color.WHITE.getRGB(), Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
+        animateSnapping.update();
     }
 
     /**

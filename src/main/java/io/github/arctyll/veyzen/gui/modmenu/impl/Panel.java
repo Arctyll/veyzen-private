@@ -150,16 +150,16 @@ public class Panel {
 		final int CLOSE_BUTTON_SIZE = 20;
 		final int CLOSE_BUTTON_MARGIN = 5;
 
-		Helper2D.drawRoundedRectangle(x, y, w, h, roundedCorners ? 4 : -1, PANEL.getRGB(), 1);
+		Helper2D.drawRoundedRectangle(x, y, w, h, 2, PANEL.getRGB(), 2);
 
 		Helper2D.drawRoundedRectangle(
 			x,
 			selected == 1 ? y + TAB_OFFSET_Y : y + TAB_OFFSET_Y * 2,
 			w,
 			selected == 1 ? h + MODS_AREA_EXTRA_HEIGHT : h + OPTIONS_AREA_EXTRA_HEIGHT,
-			roundedCorners ? 4 : -1,
+			2,
 			BACKGROUND.getRGB(),
-			1
+			2
 		);
 
 		if (selected == 0) {
@@ -172,9 +172,9 @@ public class Panel {
 			y + CLOSE_BUTTON_MARGIN,
 			CLOSE_BUTTON_SIZE,
 			CLOSE_BUTTON_SIZE,
-			roundedCorners ? 3 : -1,
+			roundedCorners ? 2 : -1,
 			(hoveredClose ? HOVERED : SIDEBAR).getRGB(),
-			1
+			0
 		);
 
 		Helper2D.drawPicture(x + w - CLOSE_BUTTON_SIZE - CLOSE_BUTTON_MARGIN, y + CLOSE_BUTTON_MARGIN, CLOSE_BUTTON_SIZE, CLOSE_BUTTON_SIZE, TEXT.getRGB(), "icon/cross.png");
@@ -197,7 +197,7 @@ public class Panel {
 					y + h + TEXTBOX_OFFSET_Y,
 					length + 25,
 					20,
-					roundedCorners ? 3 : -1,
+					roundedCorners ? 2 : -1,
 					(selectedType.equals(type) ? ACCENT : SIDEBAR).getRGB(),
 					1
 				);
@@ -249,10 +249,10 @@ public class Panel {
 			GLHelper.endScissor();
 		}
 
-		Helper2D.drawRoundedRectangle(x - 50, y, 40, h + 300, roundedCorners ? 4 : -1, SIDEBAR.getRGB(), 1);
+		Helper2D.drawRoundedRectangle(x - 50, y, 40, h + 300, roundedCorners ? 2 : -1, SIDEBAR.getRGB(), 1);
 
 		int selectorOffset = selected == 1 ? animateSideBar.getValueI() : 40 - animateSideBar.getValueI();
-		Helper2D.drawRoundedRectangle(x - 50, y + selectorOffset, 40, 40, roundedCorners ? 4 : -1, SELECTED.getRGB(), 1);
+		Helper2D.drawRoundedRectangle(x - 50, y + selectorOffset, 40, 40, roundedCorners ? 2 : -1, SELECTED.getRGB(), 1);
 
 		int buttonIndex = 0;
 		for (String button : sideButtons) {

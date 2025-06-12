@@ -18,6 +18,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
+import java.awt.*;
 
 public class ModMenu extends GuiScreen {
 
@@ -53,21 +54,15 @@ public class ModMenu extends GuiScreen {
 
         animateClock.update();
 
-        Helper2D.drawRoundedRectangle(width - 130, animateClock.getValueI() - 60, 140, 60, 10, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
-        Helper2D.drawPicture(width - 50, 5 - 50 + animateClock.getValueI(), 40, 40, color, "icon/clock.png");
+        Helper2D.drawRoundedRectangle(width - 130, animateClock.getValueI() - 60, 140, 60, 10, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
+        Helper2D.drawPicture(width - 50, 5 - 50 + animateClock.getValueI(), 40, 40, new Color(25, 103, 255, 255).getRGB(), "icon/clock.png");
 
-        Veyzen.INSTANCE.fontHelper.size40.drawString(TimeHelper.getFormattedTimeMinute(), width - 120, 10 - 50 + animateClock.getValueI(), color);
-        Veyzen.INSTANCE.fontHelper.size20.drawString(TimeHelper.getFormattedDate(), width - 120, 30 - 50 + animateClock.getValueI(), color);
+        Veyzen.INSTANCE.fontHelper.size40.drawString(TimeHelper.getFormattedTimeMinute(), width - 120, 10 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());
+        Veyzen.INSTANCE.fontHelper.size20.drawString(TimeHelper.getFormattedDate(), width - 120, 30 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());
 
-        /*
-        Draws the dark and light mode button on the bottom left
-         */
-
-        animateSnapping.update();
-        Helper2D.drawRoundedRectangle(10, height - 50, 40, 40, 2, Style.getColor(40).getRGB(), roundedCorners ? 0 : -1);
-        Helper2D.drawPicture(15, height - 45, 30, 30, color, Style.isDarkMode() ? "icon/dark.png" : "icon/light.png");
-        Helper2D.drawRoundedRectangle(60, height - 50 + animateSnapping.getValueI(), 40, 40, 2, Style.getColor(40).getRGB(), roundedCorners ? 0 : -1);
-        Helper2D.drawPicture(65, height - 45 + animateSnapping.getValueI(), 30, 30, color, Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
+        animateSnapping.update();  
+		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
+		Helper2D.drawPicture(15, height + 5 - animateSnapping.getValueI(), 30, 30, Color.WHITE.getRGB(), Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
     }
 
     /**
@@ -82,21 +77,6 @@ public class ModMenu extends GuiScreen {
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         panel.mouseClicked(mouseX, mouseY, mouseButton);
-        if(mouseButton == 0) {
-            if (MathHelper.withinBox(
-                    panel.getX(), panel.getY(),
-                    panel.getW(), panel.getH(),
-                    mouseX, mouseY
-            )) {
-                panel.setDragging(true);
-                panel.setOffsetX(mouseX - panel.getX());
-                panel.setOffsetY(mouseY - panel.getY());
-            }
-
-            if (MathHelper.withinBox(10, height - 50, 40, 40, mouseX, mouseY)) {
-                Style.setDarkMode(!Style.isDarkMode());
-            }
-        }
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 

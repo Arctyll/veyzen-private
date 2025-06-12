@@ -15,6 +15,7 @@ import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
+import java.awt.*;
 
 public class Keybinding extends Settings {
 
@@ -48,7 +49,7 @@ public class Keybinding extends Settings {
                 button.getPanel().getX() + button.getPanel().getW() - 90,
                 button.getPanel().getY() + button.getPanel().getH() + 2 + getY(),
                 70, 20, 2,
-                Style.getColor(setting.isCheckToggled() ? 80 : 50).getRGB(),
+			    new Color(20, 82, 204, 255).getRGB(),
                 roundedCorners ? 0 : -1
         );
         Veyzen.INSTANCE.fontHelper.size20.drawString(

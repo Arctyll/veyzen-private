@@ -10,6 +10,7 @@ import io.github.arctyll.veyzen.feature.option.Option;
 import io.github.arctyll.veyzen.gui.modmenu.impl.Panel;
 import io.github.arctyll.veyzen.gui.modmenu.impl.sidebar.options.Options;
 import io.github.arctyll.veyzen.helpers.render.Helper2D;
+import java.awt.*;
 
 public class Category extends Options {
 
@@ -23,9 +24,9 @@ public class Category extends Options {
                 option.getName(),
                 panel.getX() + 20,
                 panel.getY() + panel.getH() + getY() + 6,
-                0x90ffffff
+                0xffffffff
         );
-        Helper2D.drawRectangle(panel.getX() + 20, panel.getY() + panel.getH() + getY() + 20, panel.getW() - 40, 1, 0x40ffffff);
+        Helper2D.drawRectangle(panel.getX() + 20, panel.getY() + panel.getH() + getY() + 20, panel.getW() - 40, 1, new Color(34, 35, 38, 255).getRGB());
     }
 
     @Override

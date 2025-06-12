@@ -14,6 +14,7 @@ import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
+import java.awt.*;
 
 public class TextBox extends Options {
 
@@ -46,7 +47,7 @@ public class TextBox extends Options {
         int offset = getH() / 2 - 10;
 
         GLHelper.startScissor(x, y, w, h);
-        Helper2D.drawRoundedRectangle(x, y, w, h, 2, Style.getColor(isFocused() ? 50 : 30).getRGB(), roundedCorners ? 0 : -1);
+        Helper2D.drawRoundedRectangle(x, y, w, h, 2, new Color(49, 51, 56, 255).getRGB(), roundedCorners ? 0 : -1);
         if (option.getText().equals("")) {
             Veyzen.INSTANCE.fontHelper.size20.drawString(option.getPlaceholderText(), x + offset + 5, y + offset + 4, 0x50ffffff);
         } else {

@@ -15,6 +15,7 @@ import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import io.github.arctyll.veyzen.helpers.MathHelper;
 import io.github.arctyll.veyzen.helpers.animation.Animate;
 import io.github.arctyll.veyzen.helpers.animation.Easing;
+import java.awt.*;
 
 public class ModePicker extends Settings {
 
@@ -67,7 +68,7 @@ public class ModePicker extends Settings {
                     button.getPanel().getX() + button.getPanel().getW() - 30 - longestString,
                     button.getPanel().getY() + button.getPanel().getH() + getY() - setting.getOptions().length * 15 + animateSelect.getValueI() + 20,
                     longestString + 10, setting.getOptions().length * 15 + 2,
-                    2, Style.getColor(50).getRGB(),
+				    2, new Color(49, 51, 56, 255).getRGB(),
                     roundedCorners ? 0 : -1
             );
 
@@ -90,7 +91,7 @@ public class ModePicker extends Settings {
                     Helper2D.drawRoundedRectangle(
                             button.getPanel().getX() + button.getPanel().getW() - 30 - longestString,
                             button.getPanel().getY() + button.getPanel().getH() + getY() + offset * 15 - setting.getOptions().length * 15 + animateSelect.getValueI() + 20,
-                            longestString + 10, 17, 2, Style.getColor(50).getRGB(),
+						    longestString + 10, 17, 2, new Color(48, 129, 242, 255).getRGB(),
                             roundedCorners ? 0 : -1
                     );
                 }

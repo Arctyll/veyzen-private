@@ -21,6 +21,7 @@ import io.github.arctyll.veyzen.helpers.animation.Easing;
 
 import java.util.ArrayList;
 import java.util.Set;
+import java.awt.*;
 
 public class Button {
 
@@ -116,31 +117,31 @@ public class Button {
          */
 
         if (!getPanel().isAnyButtonOpen()) {
-            Helper2D.drawRoundedRectangle(panel.getX() + 5 + x, panel.getY() + panel.getH() + 35 + y, w, h, 2, Style.getColor(40).getRGB(), roundedCorners ? 0 : -1);
-            Helper2D.drawRoundedRectangle(panel.getX() + 5 + x, panel.getY() + panel.getH() + y + 90, w, 25, 2, Style.getColor(50).getRGB(), roundedCorners ? 2 : -1);
+            Helper2D.drawRoundedRectangle(panel.getX() + 5 + x, panel.getY() + panel.getH() + 35 + y, w, h, 2, new Color(42, 44, 48, 255).getRGB(), roundedCorners ? 0 : -1);
+            Helper2D.drawRoundedRectangle(panel.getX() + 5 + x, panel.getY() + panel.getH() + y + 90, w, 25, 2, new Color(20, 82, 204, 255).getRGB(), roundedCorners ? 2 : -1);
 
             Veyzen.INSTANCE.fontHelper.size20.drawString(mod.getName(), panel.getX() + 10 + x, panel.getY() + panel.getH() + y + 97, color);
 
-            Helper2D.drawRoundedRectangle(panel.getX() + 13 + x + 77, panel.getY() + panel.getH() + y + h + 14, 30, 15, 2, Style.getColor(50).getRGB(), roundedCorners ? 0 : -1);
+            Helper2D.drawRoundedRectangle(panel.getX() + 13 + x + 77, panel.getY() + panel.getH() + y + h + 14, 30, 15, 5, new Color(42, 44, 48, 255).getRGB(), roundedCorners ? 0 : -1);
             Helper2D.drawRoundedRectangle(
                     animButton.hasFinished() ?
                             mod.isToggled() ?
                                     panel.getX() + 13 + 15 + x + 77 :
                                     panel.getX() + 13 + x + 77 :
                             panel.getX() + 13 + animButton.getValueI() + x + 77,
-                    panel.getY() + panel.getH() + y + h + 14, 15, 15, 2, Style.getColor(70).getRGB(), roundedCorners ? 0 : -1);
+				panel.getY() + panel.getH() + y + h + 14, 15, 15, 5, new Color(255, 255, 255, 255).getRGB(), roundedCorners ? 0 : -1);
 
-            Helper2D.drawPicture(panel.getX() + getX() + getW() / 2 - 12, panel.getY() + panel.getH() + getY() + 45, 35, 35, color, "icon/button/button/" + mod.getName().toLowerCase() + ".png");
+            Helper2D.drawPicture(panel.getX() + getX() + getW() / 2 - 12, panel.getY() + panel.getH() + getY() + 45, 35, 35, Color.WHITE.getRGB(), "icon/button/button/" + mod.getName().toLowerCase() + ".png");
         }
 
         if (open) {
             animPanel.update();
 
-            Helper2D.drawRoundedRectangle(panel.getX() + 5, panel.getY() + panel.getH() + 5 + 300 - animPanel.getValueI(), panel.getW() - 10, panel.getH(), 2, Style.getColor(80).getRGB(), roundedCorners ? 1 : -1);
-            Helper2D.drawRectangle(panel.getX() + 5, panel.getY() + panel.getH() + 35 + 300 - animPanel.getValueI(), panel.getW() - 10, 235, Style.getColor(40).getRGB());
+            Helper2D.drawRoundedRectangle(panel.getX() + 5, panel.getY() + panel.getH() + 5 + 300 - animPanel.getValueI(), panel.getW() - 10, panel.getH(), 2, new Color(49, 51, 56, 204).getRGB(), roundedCorners ? 1 : -1);
+            Helper2D.drawRectangle(panel.getX() + 5, panel.getY() + panel.getH() + 35 + 300 - animPanel.getValueI(), panel.getW() - 10, 235, new Color(55, 59, 69, 153).getRGB());
 
             boolean hovered = MathHelper.withinBox(panel.getX() + panel.getW() - 30, panel.getY() + panel.getH() + 10, 20, 20, mouseX, mouseY);
-            Helper2D.drawRoundedRectangle(panel.getX() + panel.getW() - 30, panel.getY() + panel.getH() + 10 + 300 - animPanel.getValueI(), 20, 20, 2, Style.getColor(hovered ? 70 : 50).getRGB(), roundedCorners ? 0 : -1);
+            Helper2D.drawRoundedRectangle(panel.getX() + panel.getW() - 30, panel.getY() + panel.getH() + 10 + 300 - animPanel.getValueI(), 20, 20, 2, hovered ? new Color(255, 59, 59, 255).getRGB() : new Color(139, 0, 0, 255).getRGB(), roundedCorners ? 0 : -1);
             Helper2D.drawPicture(panel.getX() + panel.getW() - 30, panel.getY() + panel.getH() + 10 + 300 - animPanel.getValueI(), 20, 20, color, "icon/cross.png");
 
             Veyzen.INSTANCE.fontHelper.size30.drawString(mod.getName(), panel.getX() + 5 + 7, panel.getY() + panel.getH() + 5 + 8 + 300 - animPanel.getValueI(), color);

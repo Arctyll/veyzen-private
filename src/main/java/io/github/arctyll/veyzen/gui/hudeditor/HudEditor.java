@@ -97,12 +97,12 @@ public class HudEditor extends GuiScreen {
             Veyzen.modName,  
             width / 2f - Veyzen.INSTANCE.fontHelper.size40.getStringWidth(Veyzen.modName) / 2f,  
             height / 2f + 36 - animateLogo.getValueI(),  
-            color  
+            Color.WHITE.getRGB()  
 		);  
 		Helper2D.drawPicture(  
             width / 2 - 25,  
             height / 2 - 10 - animateLogo.getValueI(),  
-            50, 50, Style.getColor(70).getRGB(), "veyzenlogo.png"  
+            50, 50, Color.WHITE.getRGB(), "veyzenlogo.png"  
 		);  
 		GLHelper.endScissor();  
 
@@ -112,14 +112,14 @@ public class HudEditor extends GuiScreen {
             width / 2 - 50,  
             height / 2 - 6,  
             100, 20, 2,  
-            Style.getColor(animate.getValueI() + 30).getRGB(),  
+            new Color(49, 51, 56, animate.getValueI() + 30).getRGB(),  
             roundedCorners ? 0 : -1  
 		);  
 		Veyzen.INSTANCE.fontHelper.size20.drawString(  
             "Open Mods",  
             width / 2f - Veyzen.INSTANCE.fontHelper.size20.getStringWidth("Open Mods") / 2f,  
             height / 2f,  
-            color  
+            Color.WHITE.getRGB()  
 		);  
 
 		for (HudMod hudMod : hudModList) {  
@@ -190,10 +190,8 @@ public class HudEditor extends GuiScreen {
 		}  
 
 		animateSnapping.update();  
-		Helper2D.drawRoundedRectangle(10, height - 50, 40, 40, 2, Style.getColor(40).getRGB(), roundedCorners ? 0 : -1);  
-		Helper2D.drawPicture(15, height - 45, 30, 30, color, Style.isDarkMode() ? "icon/dark.png" : "icon/light.png");  
-		Helper2D.drawRoundedRectangle(60, height - animateSnapping.getValueI(), 40, 40, 2, Style.getColor(40).getRGB(), roundedCorners ? 0 : -1);  
-		Helper2D.drawPicture(65, height + 5 - animateSnapping.getValueI(), 30, 30, color, Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");  
+		Helper2D.drawRoundedRectangle(10, height - animateSnapping.getValueI(), 40, 40, 2, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
+		Helper2D.drawPicture(15, height + 5 - animateSnapping.getValueI(), 30, 30, Color.WHITE.getRGB(), Style.isSnapping() ? "icon/grid.png" : "icon/nogrid.png");
 	}
 
     /**

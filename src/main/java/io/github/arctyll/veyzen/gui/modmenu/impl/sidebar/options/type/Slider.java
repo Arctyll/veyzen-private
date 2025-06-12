@@ -13,6 +13,7 @@ import io.github.arctyll.veyzen.gui.modmenu.impl.sidebar.options.Options;
 import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import io.github.arctyll.veyzen.helpers.MathHelper;
 import io.github.arctyll.veyzen.helpers.hud.PositionHelper;
+import java.awt.*;
 
 public class Slider extends Options {
 
@@ -56,7 +57,7 @@ public class Slider extends Options {
         Helper2D.drawRoundedRectangle(
                 panel.getX() + panel.getW() - sliderWidth - 20,
                 panel.getY() + panel.getH() + getY() + 10,
-                150, 5, 2, Style.getColor(50).getRGB(),
+		    	150, 5, 2, new Color(49, 51, 56, 255).getRGB(),
                 roundedCorners ? 0 : -1
         );
 
@@ -79,7 +80,7 @@ public class Slider extends Options {
         Helper2D.drawRoundedRectangle(
                 (int) (posHelper.isDirection() ? xPos - posHelper.getDifference() - posHelper.getValue() : xPos - posHelper.getDifference() + posHelper.getValue()),
                 panel.getY() + panel.getH() + getY() + 5,
-                7, 16, 1, Style.getColor(80).getRGB(),
+                7, 16, 1, new Color(255, 255, 255, 153).getRGB(),
                 roundedCorners ? 0 : -1
         );
     }

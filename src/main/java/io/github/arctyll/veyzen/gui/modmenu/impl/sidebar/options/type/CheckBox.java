@@ -14,6 +14,7 @@ import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import io.github.arctyll.veyzen.helpers.MathHelper;
 import io.github.arctyll.veyzen.helpers.animation.Animate;
 import io.github.arctyll.veyzen.helpers.animation.Easing;
+import java.awt.*;
 
 public class CheckBox extends Options {
 
@@ -49,7 +50,7 @@ public class CheckBox extends Options {
                 panel.getX() + panel.getW() - 40,
                 panel.getY() + panel.getH() + getY() + 2,
                 20, 20, 2,
-                Style.getColor(option.isCheckToggled() ? 80 : 50).getRGB(),
+			    new Color(49, 51, 56, 255).getRGB(),
                 roundedCorners ? 0 : -1
         );
 

@@ -55,7 +55,7 @@ public class ModMenu extends GuiScreen {
         animateClock.update();
 
         Helper2D.drawRoundedRectangle(width - 130, animateClock.getValueI() - 60, 140, 60, 10, new Color(25, 103, 255, 255).getRGB(), roundedCorners ? 0 : -1);
-        Helper2D.drawPicture(width - 50, 5 - 50 + animateClock.getValueI(), 40, 40, new Color(25, 103, 255, 255).getRGB(), "icon/clock.png");
+        Helper2D.drawPicture(width - 50, 5 - 50 + animateClock.getValueI(), 40, 40, new Color(255, 255, 255, 255).getRGB(), "icon/clock.png");
 
         Veyzen.INSTANCE.fontHelper.size40.drawString(TimeHelper.getFormattedTimeMinute(), width - 120, 10 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());
         Veyzen.INSTANCE.fontHelper.size20.drawString(TimeHelper.getFormattedDate(), width - 120, 30 - 50 + animateClock.getValueI(), Color.WHITE.getRGB());

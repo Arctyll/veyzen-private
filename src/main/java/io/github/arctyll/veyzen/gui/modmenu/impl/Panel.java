@@ -301,7 +301,7 @@ public class Panel {
             if (MathHelper.withinBox(x + w - 25, y + 5, 20, 20, mouseX, mouseY)) {
                 Veyzen.INSTANCE.mc.displayGuiScreen(Veyzen.INSTANCE.hudEditor);
             }
-			
+
 			if (textBox.isHovered(mouseX, mouseY)) {
 				textBox.setFocused(true);
 			} else {

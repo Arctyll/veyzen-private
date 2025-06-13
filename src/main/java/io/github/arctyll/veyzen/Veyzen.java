@@ -5,8 +5,6 @@
 
 package io.github.arctyll.veyzen;
 
-import io.github.arctyll.veyzen.config.ConfigLoader;
-import io.github.arctyll.veyzen.config.ConfigSaver;
 import io.github.arctyll.veyzen.feature.mod.ModManager;
 import io.github.arctyll.veyzen.feature.option.OptionManager;
 import io.github.arctyll.veyzen.feature.setting.SettingManager;
@@ -24,6 +22,7 @@ import org.lwjgl.opengl.Display;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import net.minecraftforge.fml.client.*;
+import io.github.arctyll.veyzen.config.*;
 
 @Mod(
         modid = Veyzen.modID,
@@ -44,8 +43,8 @@ public class Veyzen {
 
     public ModManager modManager;
     public SettingManager settingManager;
-    public HudEditor hudEditor;
     public OptionManager optionManager;
+	public HudEditor hudEditor;
     public FontHelper fontHelper;
     public CpsHelper cpsHelper;
     public MessageHelper messageHelper;
@@ -61,31 +60,16 @@ public class Veyzen {
                 settingManager = new SettingManager(),
                 modManager = new ModManager(),
                 optionManager = new OptionManager(),
-                hudEditor = new HudEditor(),
                 fontHelper = new FontHelper(),
-                messageHelper = new MessageHelper()
+                messageHelper = new MessageHelper(),
+				hudEditor = new HudEditor()
         );
-
-        try {
-            if (!ConfigSaver.configExists()) {
-                ConfigSaver.saveConfig();
-            }
-            ConfigLoader.loadConfig();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+		try {
+			ConfigLoader.loadConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         fontHelper.init();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-			public void run() {
-				try {
-					ConfigSaver.saveConfig();
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-			}
-        }));
     }
 
     private void registerEvents(Object... events) {

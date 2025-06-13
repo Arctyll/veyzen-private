@@ -13,6 +13,8 @@ import io.github.arctyll.veyzen.helpers.render.Helper2D;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiSelectWorld;
+import net.minecraft.client.gui.GuiIngameMenu;
+import net.minecraftforge.fml.client.FMLClientHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,17 +27,10 @@ public class TitleScreen extends Panorama {
     public TitleScreen() {
         textButtons.add(new TextButton("Singleplayer", width / 2 - 75, height / 2));
         textButtons.add(new TextButton("Multiplayer", width / 2 - 75, height / 2 + 25));
-        textButtons.add(new TextButton("Settings", width / 2 - 75, height / 2 + 50));
+        textButtons.add(new TextButton("Mods", width / 2 - 75, height / 2 + 50));      // ✅ Mods is above Settings
+        textButtons.add(new TextButton("Settings", width / 2 - 75, height / 2 + 75));
         iconButtons.add(new IconButton("cross.png", width - 25, 5));
     }
-
-    /**
-     * Renders button text and logos on the screen
-     *
-     * @param mouseX       The current X position of the mouse
-     * @param mouseY       The current Y position of the mouse
-     * @param partialTicks The partial ticks used for rendering
-     */
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -57,14 +52,6 @@ public class TitleScreen extends Panorama {
         drawCopyright();
     }
 
-    /**
-     * Is called when any mouse button is pressed. Adds functionality to every button on screen
-     *
-     * @param mouseX      The current X position of the mouse
-     * @param mouseY      The current Y position of the mouse
-     * @param mouseButton The current mouse button which is pressed
-     */
-
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         for (TextButton textButton : textButtons) {
@@ -75,6 +62,9 @@ public class TitleScreen extends Panorama {
                         break;
                     case "Multiplayer":
                         mc.displayGuiScreen(new GuiMultiplayer(this));
+                        break;
+                    case "Mods":
+                        FMLClientHandler.instance().showInGameModOptions(new GuiIngameMenu());
                         break;
                     case "Settings":
                         mc.displayGuiScreen(new GuiOptions(this, mc.gameSettings));
@@ -94,19 +84,11 @@ public class TitleScreen extends Panorama {
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * Draws the main "Cloud" Text and the Logo in the middle
-     */
-
     private void drawLogo() {
         GlyphPageFontRenderer fontRenderer = Veyzen.INSTANCE.fontHelper.size40;
         fontRenderer.drawString(Veyzen.modName, width / 2f - fontRenderer.getStringWidth(Veyzen.modName) / 2f, height / 2f - 27.5f, 0xffffffff);
         Helper2D.drawPicture(width / 2 - 30, height / 2 - 80, 60, 60, 0xffffffff, "veyzenlogo.png");
     }
-
-    /**
-     * Draws the "Cloud Client" Text and Mojang Copyright Notice on the bottom
-     */
 
     private void drawCopyright() {
         GlyphPageFontRenderer fontRenderer = Veyzen.INSTANCE.fontHelper.size20;

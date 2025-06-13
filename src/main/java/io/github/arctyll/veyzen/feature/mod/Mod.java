@@ -6,7 +6,6 @@
 package io.github.arctyll.veyzen.feature.mod;
 
 import net.minecraftforge.common.MinecraftForge;
-import io.github.arctyll.veyzen.config.*;
 import java.io.*;
 
 public class Mod {
@@ -65,11 +64,6 @@ public class Mod {
 
     public void toggle() {
 		toggled = !toggled;
-		try {
-			ConfigSaver.saveConfig();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		callMethod();
 	}
 

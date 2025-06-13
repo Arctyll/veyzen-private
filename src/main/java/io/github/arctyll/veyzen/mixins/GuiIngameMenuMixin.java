@@ -71,7 +71,7 @@ public abstract class GuiIngameMenuMixin extends GuiScreen {
                 } else {
                     this.mc.displayGuiScreen(new GuiMultiplayer(new GuiMainMenu()));
                 }
-
+				break;
             case 2:
             case 3:
             default:
@@ -96,9 +96,6 @@ public abstract class GuiIngameMenuMixin extends GuiScreen {
                 break;
             case 30:
                 this.mc.displayGuiScreen(new GuiMultiplayer(this));
-                break;
-            case 31:
-                this.mc.displayGuiScreen(Veyzen.INSTANCE.hudEditor);
                 break;
         }
     }

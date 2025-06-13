@@ -11,7 +11,7 @@ import java.awt.Color;
 import io.github.arctyll.veyzen.helpers.render.*;
 
 public class GuiSplashScreen {
-
+	
     private final Minecraft mc = Minecraft.getMinecraft();
     private Framebuffer framebuffer;
 
